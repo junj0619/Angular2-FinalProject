@@ -1,0 +1,41 @@
+<h2>Posts</h2>
+<!--<i class="fa fa-spinner fa-spin fa-3x" ></i>-->
+
+<div class="row">
+    <div class="col-md-6">
+        <select class="form-control" (change)="reloadPosts({userId:u.value})" #u>
+            <option value="">Select a user...</option>
+            <option *ngFor="#user of users" value="{{user.id}}">
+                {{user.name}}
+            </option>
+        </select>
+        <spinner [visable]="postLoading"></spinner>
+        <ul class="list-group posts">
+            <li class="list-group-item" (click)="select(post)" *ngFor="#post of posts" [class.active]="currentPost == post">
+                {{post.title}}
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-6" *ngIf="currentPost">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{currentPost.title}}</h3>
+            </div>
+            <div class="panel-body">
+                {{currentPost.body}}
+            </div>
+            <hr/>
+            <spinner [visable]="commentsLoading"></spinner>
+            <div class="media" *ngFor="#postComment of postComments">
+                <a class="media-left" href="#">
+                    <img class="media-object thumbnail" style="border-radius:100px" src="http://lorempixel.com/80/80/people?{{postComment.id}}"
+                        alt="Generic placeholder image">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">{{postComment.name}}</h4>
+                    {{postComment.body}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
