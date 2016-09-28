@@ -2,6 +2,7 @@ import {Component, OnInit} from 'angular2/core';
 
 import {SpinnerComponent} from './spinner.component';
 import {PostsService} from './posts.service';
+import {PaginationComponent} from './pagination.component';
 import {UsersService} from './users.service';
 
 import {Post} from './post';
@@ -9,7 +10,7 @@ import {Post} from './post';
 @Component({
     selector: 'post',
     templateUrl: 'app/posts.component.html',
-    directives: [SpinnerComponent],
+    directives: [SpinnerComponent,PaginationComponent],
     providers: [PostsService, UsersService]
 })
 
@@ -23,6 +24,7 @@ export class PostsComponent implements OnInit {
     postLoading;
     commentsLoading;
     users = [];
+    pageSize = 10;
 
     constructor(private _postsService: PostsService, private _usersService: UsersService) {
 

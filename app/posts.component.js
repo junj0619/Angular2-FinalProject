@@ -1,4 +1,4 @@
-System.register(['angular2/core', './spinner.component', './posts.service', './users.service'], function(exports_1, context_1) {
+System.register(['angular2/core', './spinner.component', './posts.service', './pagination.component', './users.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './spinner.component', './posts.service', './u
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, spinner_component_1, posts_service_1, users_service_1;
+    var core_1, spinner_component_1, posts_service_1, pagination_component_1, users_service_1;
     var PostsComponent;
     return {
         setters:[
@@ -23,6 +23,9 @@ System.register(['angular2/core', './spinner.component', './posts.service', './u
             function (posts_service_1_1) {
                 posts_service_1 = posts_service_1_1;
             },
+            function (pagination_component_1_1) {
+                pagination_component_1 = pagination_component_1_1;
+            },
             function (users_service_1_1) {
                 users_service_1 = users_service_1_1;
             }],
@@ -34,6 +37,7 @@ System.register(['angular2/core', './spinner.component', './posts.service', './u
                     this.posts = [];
                     this.postComments = [];
                     this.users = [];
+                    this.pageSize = 10;
                 }
                 PostsComponent.prototype.ngOnInit = function () {
                     this.loadUser();
@@ -66,7 +70,7 @@ System.register(['angular2/core', './spinner.component', './posts.service', './u
                     core_1.Component({
                         selector: 'post',
                         templateUrl: 'app/posts.component.html',
-                        directives: [spinner_component_1.SpinnerComponent],
+                        directives: [spinner_component_1.SpinnerComponent, pagination_component_1.PaginationComponent],
                         providers: [posts_service_1.PostsService, users_service_1.UsersService]
                     }), 
                     __metadata('design:paramtypes', [posts_service_1.PostsService, users_service_1.UsersService])

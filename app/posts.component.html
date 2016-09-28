@@ -1,6 +1,6 @@
 <h2>Posts</h2>
 <!--<i class="fa fa-spinner fa-spin fa-3x" ></i>-->
-
+ 
 <div class="row">
     <div class="col-md-6">
         <select class="form-control" (change)="reloadPosts({userId:u.value})" #u>
@@ -9,6 +9,7 @@
                 {{user.name}}
             </option>
         </select>
+        <pagination [items]="posts" [page-size]="pageSize"></pagination>
         <spinner [visable]="postLoading"></spinner>
         <ul class="list-group posts">
             <li class="list-group-item" (click)="select(post)" *ngFor="#post of posts" [class.active]="currentPost == post">
