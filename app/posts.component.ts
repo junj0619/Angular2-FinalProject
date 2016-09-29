@@ -10,7 +10,7 @@ import {Post} from './post';
 @Component({
     selector: 'post',
     templateUrl: 'app/posts.component.html',
-    directives: [SpinnerComponent,PaginationComponent],
+    directives: [SpinnerComponent, PaginationComponent],
     providers: [PostsService, UsersService]
 })
 
@@ -25,6 +25,7 @@ export class PostsComponent implements OnInit {
     commentsLoading;
     users = [];
     pageSize = 10;
+    pagedPosts = [];
 
     constructor(private _postsService: PostsService, private _usersService: UsersService) {
 
@@ -38,7 +39,10 @@ export class PostsComponent implements OnInit {
     private loadPost(filter?) {
         this.postLoading = true;
         this._postsService.loadPost(filter).subscribe(
-            response => { this.posts = response; },
+            response => {
+                this.posts = response;
+                this.pagedPosts = this.getPageInPost(1);
+            },
             null,
             () => this.postLoading = false
         );
@@ -67,4 +71,15 @@ export class PostsComponent implements OnInit {
         this.loadPost(filter);
     }
 
+    onPageChanged(page) {
+        this.pagedPosts = this.getPageInPost(page);
+    }
+
+    private getPageInPost(page) {
+        var result = [];
+        for (let i = (page - 1) * this.pageSize; i < (page * this.pageSize); i++)
+            result.push(this.posts[i]);
+        //console.log(result);
+        return result;
+    }
 }

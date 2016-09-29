@@ -22,18 +22,34 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 function PaginationComponent() {
                     this.items = [];
                     this.pageSize = 10;
-                    this.pageItems = [];
+                    this.pageChanged = new core_1.EventEmitter();
                 }
-                PaginationComponent.prototype.ngOnInit = function () {
-                    this.getPageItems();
+                PaginationComponent.prototype.ngOnChanges = function () {
+                    this.currentPage = 1;
+                    this.getPages();
                 };
-                PaginationComponent.prototype.ngOnChanges = function (currentPage) {
-                };
-                PaginationComponent.prototype.getPageItems = function () {
-                    var pageNumber = Math.floor(this.items.length / this.pageSize);
-                    for (var i = 1; i <= pageNumber; i++) {
-                        this.pageItems.push({ pageNumber: i, index: i - 1 });
+                PaginationComponent.prototype.getPages = function () {
+                    var pagesCount = Math.floor(this.items.length / this.pageSize);
+                    this.pages = [];
+                    for (var i = 1; i <= pagesCount; i++) {
+                        this.pages.push(i);
                     }
+                };
+                PaginationComponent.prototype.changePage = function (page) {
+                    this.currentPage = page;
+                    this.pageChanged.emit(this.currentPage);
+                };
+                PaginationComponent.prototype.previous = function () {
+                    if (this.currentPage == 1)
+                        return;
+                    this.currentPage--;
+                    this.pageChanged.emit(this.currentPage);
+                };
+                PaginationComponent.prototype.next = function () {
+                    if (this.currentPage == this.pages.length)
+                        return;
+                    this.currentPage++;
+                    this.pageChanged.emit(this.currentPage);
                 };
                 __decorate([
                     core_1.Input(), 
@@ -43,10 +59,14 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     core_1.Input('page-size'), 
                     __metadata('design:type', Object)
                 ], PaginationComponent.prototype, "pageSize", void 0);
+                __decorate([
+                    core_1.Output('page-changed'), 
+                    __metadata('design:type', Object)
+                ], PaginationComponent.prototype, "pageChanged", void 0);
                 PaginationComponent = __decorate([
                     core_1.Component({
                         selector: 'pagination',
-                        template: "\n    <nav aria-label=\"Page navigation\" *ngIf=\"items.length>pageSize\">\n    <ul class=\"pagination\">\n    <li [class.disabled]=\"currentPage==1\">\n        <a href=\"#\" aria-label=\"Previous\">\n        <span aria-hidden=\"true\">&laquo;</span>\n        </a>\n    </li>\n    <li *ngFor=\"#pageItem of pageItems\" (click)=\"changePage(page)\" [class.actived]=\"currentPage==pageItem\">\n        <a href=\"#\">{{pageItem.pageNumber}}</a>\n    </li>   \n    <li [class.disabled]=\"currentPage==pageItems.length\">\n        <a href=\"#\" aria-label=\"Next\">\n        <span aria-hidden=\"true\">&raquo;</span>\n        </a>\n    </li>\n    </ul>\n    </nav>\n    "
+                        template: "\n    <nav aria-label=\"Page navigation\" *ngIf=\"items.length>pageSize\">\n        <ul class=\"pagination\">\n            <li [class.disabled]=\"currentPage==1\" (click)=\"previous()\">\n                <a aria-label=\"Previous\">\n                <span aria-hidden=\"true\">&laquo;</span>\n                </a>\n            </li>\n            <li *ngFor=\"#page of pages\" (click)=\"changePage(page)\" [class.active]=\"currentPage==page\">\n                <a>{{page}}</a>\n            </li>   \n            <li [class.disabled]=\"currentPage==pages.length\" (click)=\"next()\">\n                <a aria-label=\"Next\">\n                <span aria-hidden=\"true\">&raquo;</span>\n                </a>\n            </li>\n        </ul>\n    </nav>\n    "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], PaginationComponent);

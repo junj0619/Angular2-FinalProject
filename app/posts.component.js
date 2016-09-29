@@ -38,6 +38,7 @@ System.register(['angular2/core', './spinner.component', './posts.service', './p
                     this.postComments = [];
                     this.users = [];
                     this.pageSize = 10;
+                    this.pagedPosts = [];
                 }
                 PostsComponent.prototype.ngOnInit = function () {
                     this.loadUser();
@@ -46,7 +47,10 @@ System.register(['angular2/core', './spinner.component', './posts.service', './p
                 PostsComponent.prototype.loadPost = function (filter) {
                     var _this = this;
                     this.postLoading = true;
-                    this._postsService.loadPost(filter).subscribe(function (response) { _this.posts = response; }, null, function () { return _this.postLoading = false; });
+                    this._postsService.loadPost(filter).subscribe(function (response) {
+                        _this.posts = response;
+                        _this.pagedPosts = _this.getPageInPost(1);
+                    }, null, function () { return _this.postLoading = false; });
                 };
                 PostsComponent.prototype.loadUser = function () {
                     var _this = this;
@@ -65,6 +69,16 @@ System.register(['angular2/core', './spinner.component', './posts.service', './p
                 PostsComponent.prototype.reloadPosts = function (filter) {
                     this.currentPost = null;
                     this.loadPost(filter);
+                };
+                PostsComponent.prototype.onPageChanged = function (page) {
+                    this.pagedPosts = this.getPageInPost(page);
+                };
+                PostsComponent.prototype.getPageInPost = function (page) {
+                    var result = [];
+                    for (var i = (page - 1) * this.pageSize; i < (page * this.pageSize); i++)
+                        result.push(this.posts[i]);
+                    //console.log(result);
+                    return result;
                 };
                 PostsComponent = __decorate([
                     core_1.Component({

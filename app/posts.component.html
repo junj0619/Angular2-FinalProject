@@ -9,10 +9,10 @@
                 {{user.name}}
             </option>
         </select>
-        <pagination [items]="posts" [page-size]="pageSize"></pagination>
+        <pagination [items]="posts" [page-size]="pageSize" (page-changed)="onPageChanged($event)"></pagination>
         <spinner [visable]="postLoading"></spinner>
         <ul class="list-group posts">
-            <li class="list-group-item" (click)="select(post)" *ngFor="#post of posts" [class.active]="currentPost == post">
+            <li class="list-group-item" (click)="select(post)" *ngFor="#post of pagedPosts" [class.active]="currentPost == post">
                 {{post.title}}
             </li>
         </ul>
