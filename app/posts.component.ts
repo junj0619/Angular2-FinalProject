@@ -41,7 +41,7 @@ export class PostsComponent implements OnInit {
         this._postsService.loadPost(filter).subscribe(
             response => {
                 this.posts = response;
-                this.pagedPosts = this.getPageInPost(1);
+                this.pagedPosts = _.take(this.posts, this.pageSize);
             },
             null,
             () => this.postLoading = false
@@ -72,14 +72,7 @@ export class PostsComponent implements OnInit {
     }
 
     onPageChanged(page) {
-        this.pagedPosts = this.getPageInPost(page);
-    }
-
-    private getPageInPost(page) {
-        var result = [];
-        for (let i = (page - 1) * this.pageSize; i < (page * this.pageSize); i++)
-            result.push(this.posts[i]);
-        //console.log(result);
-        return result;
+        var startIndex = (page - 1) * this.pageSize;
+        this.pagedPosts = _.take(_.rest(this.posts, startIndex), this.pageSize);
     }
 }
