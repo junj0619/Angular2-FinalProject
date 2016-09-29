@@ -1,15 +1,15 @@
 import {Component, OnInit} from 'angular2/core';
 
-import {SpinnerComponent} from './spinner.component';
+import {SpinnerComponent} from '../shared/spinner.component';
 import {PostsService} from './posts.service';
-import {PaginationComponent} from './pagination.component';
-import {UsersService} from './users.service';
+import {PaginationComponent} from '../shared/pagination.component';
+import {UsersService} from '../users/users.service';
 
 import {Post} from './post';
 
 @Component({
     selector: 'post',
-    templateUrl: 'app/posts.component.html',
+    templateUrl: 'app/posts/posts.component.html',
     directives: [SpinnerComponent, PaginationComponent],
     providers: [PostsService, UsersService]
 })

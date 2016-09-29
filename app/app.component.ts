@@ -6,9 +6,9 @@ import {NavbarComponent} from './navbar.component';
 
 
 import {HomeComponent} from './home.component';
-import {PostsComponent} from './posts.component';
-import {UsersComponent} from './users.component';
-import {UserFormComponent} from './user-form.component';
+import {PostsComponent} from './posts/posts.component';
+import {UsersComponent} from './users/users.component';
+import {UserFormComponent} from './users/user-form.component';
 import {NotFoundComponent} from './not-found.component';
 
 @RouteConfig([

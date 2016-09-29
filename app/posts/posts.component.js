@@ -1,4 +1,4 @@
-System.register(['angular2/core', './spinner.component', './posts.service', './pagination.component', './users.service'], function(exports_1, context_1) {
+System.register(['angular2/core', '../shared/spinner.component', './posts.service', '../shared/pagination.component', '../users/users.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -77,7 +77,7 @@ System.register(['angular2/core', './spinner.component', './posts.service', './p
                 PostsComponent = __decorate([
                     core_1.Component({
                         selector: 'post',
-                        templateUrl: 'app/posts.component.html',
+                        templateUrl: 'app/posts/posts.component.html',
                         directives: [spinner_component_1.SpinnerComponent, pagination_component_1.PaginationComponent],
                         providers: [posts_service_1.PostsService, users_service_1.UsersService]
                     }), 

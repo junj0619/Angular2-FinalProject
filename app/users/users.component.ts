@@ -6,7 +6,7 @@ import {User} from './user.interface';
 
 @Component({
     selector: 'user',
-    templateUrl: 'app/users.component.html',
+    templateUrl: 'app/users/users.component.html',
     providers: [UsersService],
     directives: [RouterLink]
 })
