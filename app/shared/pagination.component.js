@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
+System.register(['@angular/core'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -66,7 +66,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 PaginationComponent = __decorate([
                     core_1.Component({
                         selector: 'pagination',
-                        template: "\n    <nav aria-label=\"Page navigation\" *ngIf=\"items.length>pageSize\">\n        <ul class=\"pagination\">\n            <li [class.disabled]=\"currentPage==1\" (click)=\"previous()\">\n                <a aria-label=\"Previous\">\n                <span aria-hidden=\"true\">&laquo;</span>\n                </a>\n            </li>\n            <li *ngFor=\"#page of pages\" (click)=\"changePage(page)\" [class.active]=\"currentPage==page\">\n                <a>{{page}}</a>\n            </li>   \n            <li [class.disabled]=\"currentPage==pages.length\" (click)=\"next()\">\n                <a aria-label=\"Next\">\n                <span aria-hidden=\"true\">&raquo;</span>\n                </a>\n            </li>\n        </ul>\n    </nav>\n    "
+                        template: "\n    <nav aria-label=\"Page navigation\" *ngIf=\"items.length>pageSize\">\n        <ul class=\"pagination\">\n            <li [class.disabled]=\"currentPage==1\" (click)=\"previous()\">\n                <a aria-label=\"Previous\">\n                <span aria-hidden=\"true\">&laquo;</span>\n                </a>\n            </li>\n            <li *ngFor=\"let page of pages\" (click)=\"changePage(page)\" [class.active]=\"currentPage==page\">\n                <a>{{page}}</a>\n            </li>   \n            <li [class.disabled]=\"currentPage==pages.length\" (click)=\"next()\">\n                <a aria-label=\"Next\">\n                <span aria-hidden=\"true\">&raquo;</span>\n                </a>\n            </li>\n        </ul>\n    </nav>\n    "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], PaginationComponent);

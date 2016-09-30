@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, OnChanges} from 'angular2/core';
+import {Component, Input, Output, EventEmitter, OnChanges} from '@angular/core';
 
 
 @Component({
@@ -11,7 +11,7 @@ import {Component, Input, Output, EventEmitter, OnChanges} from 'angular2/core';
                 <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            <li *ngFor="#page of pages" (click)="changePage(page)" [class.active]="currentPage==page">
+            <li *ngFor="let page of pages" (click)="changePage(page)" [class.active]="currentPage==page">
                 <a>{{page}}</a>
             </li>   
             <li [class.disabled]="currentPage==pages.length" (click)="next()">

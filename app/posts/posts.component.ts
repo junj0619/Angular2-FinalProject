@@ -1,4 +1,4 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit} from '@angular/core';
 
 import {SpinnerComponent} from '../shared/spinner.component';
 import {PostsService} from './posts.service';
