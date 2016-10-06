@@ -1,20 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 
-import {SpinnerComponent} from '../shared/spinner.component';
 import {PostsService} from './posts.service';
-import {PaginationComponent} from '../shared/pagination.component';
 import {UsersService} from '../users/users.service';
 
 import {Post} from './post';
 
+import * as _ from 'underscore'; 
+
 @Component({
     selector: 'post',
-    templateUrl: 'app/posts/posts.component.html',
-    directives: [SpinnerComponent, PaginationComponent],
-    providers: [PostsService, UsersService]
+    templateUrl: 'app/posts/posts.component.html'
 })
-
-
 
 export class PostsComponent implements OnInit {
 

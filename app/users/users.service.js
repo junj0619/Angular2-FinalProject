@@ -44,7 +44,8 @@ System.register(['@angular/http', '@angular/core', 'rxjs/add/operator/map'], fun
                         .map(function (response) { return response.json(); });
                 };
                 UsersService.prototype.deleteUser = function (userId) {
-                    return this._http.delete(this.getUserUrl(userId)).map(function (response) { return response.json(); });
+                    return this._http.delete(this.getUserUrl(userId))
+                        .map(function (response) { return response.json(); });
                 };
                 UsersService.prototype.getUserUrl = function (userId) {
                     return this.url + "/" + userId;

@@ -1,5 +1,5 @@
 <h3>Users</h3>
-<a class="btn btn-primary" [routerLink]="['AddUser']">Add User</a>
+<a class="btn btn-primary" routerLink="/users/new">Add User</a>
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -10,10 +10,12 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let user of users;" >
+        <tr *ngFor="let user of users;">
             <td>{{user.name}}</td>
             <td>{{user.email}}</td>
-            <td><a class="glyphicon glyphicon-edit" style="text-decoration: none;" [routerLink]="['EditUser',{id:user.id}]"></a></td>
+            <td>
+                <a class="glyphicon glyphicon-edit" style="text-decoration: none;" [routerLink]="['/users',user.id]"></a>
+            </td>
             <td><i class="glyphicon glyphicon-remove clickable" (click)="delete(user)"></i></td>
         </tr>
     </tbody>

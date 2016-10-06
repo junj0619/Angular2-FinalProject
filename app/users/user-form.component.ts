@@ -1,26 +1,25 @@
-import {Component, OnInit} from '@angular/core';
-import {CanDeactivate, Router, RouteParams} from '@angular/router-deprecated';
-import {FormBuilder, Control, ControlGroup, Validators} from '@angular/common';
+import { Component, OnInit }                 from '@angular/core';
+import { ActivatedRoute, Router }            from '@angular/router';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {BaseValidators} from '../shared/baseValidators';
 import {UsersService} from './users.service';
 import {User} from './user';
 
 @Component({
-    templateUrl: 'app/users/user-form.component.html',
-    providers: [UsersService]
+    templateUrl: 'app/users/user-form.component.html'
 })
-export class UserFormComponent implements CanDeactivate, OnInit {
+export class UserFormComponent implements OnInit {
 
-    private form: ControlGroup;
+    private form: FormGroup;
     private user = new User();
-    private title = {};
-    private id;
+    private title: string;
+    private id: number;
     constructor(
         private fb: FormBuilder,
 
         private _router: Router,
-        private _routeParams: RouteParams,
+        private _route: ActivatedRoute,
         private _userService: UsersService
     ) {
         this.form = this.fb.group({
@@ -38,15 +37,19 @@ export class UserFormComponent implements CanDeactivate, OnInit {
 
     ngOnInit() {
 
-        let id = this._routeParams.get("id");
-        this.title = id == null ? "Add User" : "Edit User";
+        var id = this._route.params.subscribe(params => {
+            this.id = +params["id"];
+            this.title = this.id ? "Edit User" : "New User";
 
-        if (!id)
+        })
+
+
+        if (!this.id || isNaN(this.id))
             return;
 
-        this._userService.getUserById(id).subscribe(
-            response => {
-                this.user = response;
+        this._userService.getUserById(this.id).subscribe(
+            user => {
+                this.user = user;
                 // console.log(response);
             },
             response => {
@@ -57,20 +60,13 @@ export class UserFormComponent implements CanDeactivate, OnInit {
         );
     }
 
-    routerCanDeactivate() {
-        if (this.form.dirty) {
-            return confirm("You have unsaved changes. Are you sure you want to navigate away?");
-        }
-        return true;
-    }
-
     addUser(user) {
         this._userService.addUser(user)
             .subscribe(x => console.log(x));
     }
 
     updateUser(user) {
-        this._userService.updateUser(this._routeParams.get("id"), user)
+        this._userService.updateUser(user.id, user)
             .subscribe(x => console.log(x));
     }
 
@@ -82,7 +78,7 @@ export class UserFormComponent implements CanDeactivate, OnInit {
 
         // Ideally, here we'd want:
         // this.form.markAsPristine();
-        this._router.navigate(['Users'])
+        this._router.navigate(['users'])
     }
 
 

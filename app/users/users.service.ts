@@ -35,7 +35,8 @@ export class UsersService {
     }
 
     deleteUser(userId) {
-        return this._http.delete(this.getUserUrl(userId)).map(response => response.json());
+        return this._http.delete(this.getUserUrl(userId))
+            .map(response => response.json());
     }
 
     private getUserUrl(userId) {

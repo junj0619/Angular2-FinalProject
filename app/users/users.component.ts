@@ -1,14 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {RouterLink} from '@angular/router-deprecated';
 
 import {UsersService} from './users.service';
 import {User} from './user.interface';
 
 @Component({
     selector: 'user',
-    templateUrl: 'app/users/users.component.html',
-    providers: [UsersService],
-    directives: [RouterLink]
+    templateUrl: 'app/users/users.component.html'    
 })
 
 export class UsersComponent implements OnInit {
